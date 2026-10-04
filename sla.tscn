@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://svgr0yw61vs5"]
+
+[ext_resource type="Script" uid="uid://ytpvddibwhm4" path="res://sla.gd" id="1_0hmsm"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qpc1o"]
+size = Vector2(2, 1)
+
+[node name="SLA" type="Node3D" unique_id=139537196]
+script = ExtResource("1_0hmsm")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=421612081]
+size = Vector2i(800, 400)
+
+[node name="Panel" type="Panel" parent="SubViewport" unique_id=1638011974]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="CoinsLabel" type="Label" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "Coins: 0"
+
+[node name="P50Row" type="HBoxContainer" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewport/Panel/VBoxContainer/P50Row"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "p50"
+
+[node name="Bar" type="ProgressBar" parent="SubViewport/Panel/VBoxContainer/P50Row"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="P75Row" type="HBoxContainer" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewport/Panel/VBoxContainer/P75Row"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "p75"
+
+[node name="Bar" type="ProgressBar" parent="SubViewport/Panel/VBoxContainer/P75Row"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="P90Row" type="HBoxContainer" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewport/Panel/VBoxContainer/P90Row"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "p90"
+
+[node name="Bar" type="ProgressBar" parent="SubViewport/Panel/VBoxContainer/P90Row"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="P95Row" type="HBoxContainer" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewport/Panel/VBoxContainer/P95Row"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "p95"
+
+[node name="Bar" type="ProgressBar" parent="SubViewport/Panel/VBoxContainer/P95Row"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="P99Row" type="HBoxContainer" parent="SubViewport/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="SubViewport/Panel/VBoxContainer/P99Row"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "p99"
+
+[node name="Bar" type="ProgressBar" parent="SubViewport/Panel/VBoxContainer/P99Row"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=1084183162]
+mesh = SubResource("QuadMesh_qpc1o")

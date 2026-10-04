@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cshd7esimp8l8"]
+
+[ext_resource type="Script" uid="uid://mcej2d5vdbqw" path="res://client.gd" id="1_cli"]
+[ext_resource type="PackedScene" uid="uid://dplx4wn77yi2y" path="res://request.tscn" id="2_req"]
+[ext_resource type="PackedScene" path="res://server.tscn" id="3_srv"]
+[ext_resource type="PackedScene" uid="uid://svgr0yw61vs5" path="res://sla.tscn" id="4_sla"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cli"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="ClientServer" type="Node3D" unique_id=979936648]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1804104736]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1545282307]
+transform = Transform3D(0.99804634, 0.015224672, -0.060595255, 0, 0.9698562, 0.2436782, 0.062478602, -0.24320212, 0.9679614, 0, 2, 2.7906075)
+fov = 66.5978
+
+[node name="Client" type="Node3D" parent="." unique_id=1725053951 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 0)
+script = ExtResource("1_cli")
+request_scene = ExtResource("2_req")
+target = NodePath("../Server")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Client" unique_id=292972009]
+mesh = SubResource("BoxMesh_cli")
+
+[node name="Timer" type="Timer" parent="Client" unique_id=1118704401]
+wait_time = 0.25
+autostart = true
+
+[node name="Server" parent="." unique_id=980500422 instance=ExtResource("3_srv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 0)
+
+[node name="SLA" parent="." unique_id=1033683032 instance=ExtResource("4_sla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1.5)
+
+[connection signal="timeout" from="Client/Timer" to="Client" method="_on_timer_timeout"]

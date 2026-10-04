@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dplx4wn77yi2y"]
+
+[ext_resource type="Script" uid="uid://c6541ixefqwod" path="res://request.gd" id="1_req"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_req"]
+radius = 0.12
+
+[sub_resource type="SphereMesh" id="SphereMesh_req"]
+radius = 0.12
+height = 0.24
+
+[node name="Request" type="Area3D"]
+monitoring = false
+script = ExtResource("1_req")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_req")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_req")

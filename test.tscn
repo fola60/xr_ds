@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://co41d26tibx8f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mf4mk"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_37kl0"]
+sky_material = SubResource("ProceduralSkyMaterial_mf4mk")
+
+[sub_resource type="Environment" id="Environment_8uh7m"]
+background_mode = 2
+sky = SubResource("Sky_37kl0")
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpc1o"]
+
+[node name="Node3D" type="Node3D" unique_id=1424097184]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=700050166]
+environment = SubResource("Environment_8uh7m")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1431061994]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=2720180]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1544374647]
+mesh = SubResource("BoxMesh_qpc1o")
