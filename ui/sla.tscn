@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://svgr0yw61vs5"]
 
-[ext_resource type="Script" uid="uid://ytpvddibwhm4" path="res://sla.gd" id="1_0hmsm"]
+[ext_resource type="Script" uid="uid://ytpvddibwhm4" path="res://ui/sla.gd" id="1_0hmsm"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_qpc1o"]
 size = Vector2(2, 1)

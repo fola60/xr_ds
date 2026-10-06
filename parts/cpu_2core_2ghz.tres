@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CPUPart" format=3 uid="uid://ohm53hq4xfm3"]
+
+[ext_resource type="Script" uid="uid://6a0drdfur456" path="res://parts/cpu_part.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+cores = 2
+clock_ghz = 2.0
+display_name = "2-core CPU, 2 GHz"
+price = 400
+upkeep = 15

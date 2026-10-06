@@ -8,4 +8,5 @@ extends Node3D
 func _on_timer_timeout() -> void:
 	var req: Request = request_scene.instantiate()
 	add_child(req)
+	req.origin = global_position # Responses come back to the client.
 	Device.send(req, target)

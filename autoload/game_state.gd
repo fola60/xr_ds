@@ -6,10 +6,12 @@ const MINUTE_BONUS := 20 ## Coins per percentile target met at each minute check
 const MINUTE_PENALTY := 10 ## Coins lost per percentile target missed at each minute check.
 const RECALC_INTERVAL := 0.25 ## Seconds between percentile recalculations.
 
-## SLA target per percentile, in seconds of end-to-end latency.
-## Tuned for client_server.tscn: an idle request takes 2.4 s (2 s travel + 0.4 s processing),
-## and each request queued ahead adds 0.4 s. p50 allows ~1 queued, p99 ~6.
-var sla_targets := {50: 3.0, 75: 3.5, 90: 4.0, 95: 4.5, 99: 5.0}
+## SLA target per percentile, in seconds of latency (landing on the source to leaving it).
+## Defaults suit a single base server: an idle request takes 0.4 s and each one queued ahead
+## adds 0.4 s, so p50 allows ~1 queued and p99 ~5; a full 8-slot queue fails everything.
+## Levels can pass their own targets to start_run().
+const DEFAULT_SLA_TARGETS := {50: 1.0, 75: 1.4, 90: 1.8, 95: 2.1, 99: 2.5}
+var sla_targets := DEFAULT_SLA_TARGETS.duplicate()
 ## Live latency per percentile, in seconds, recalculated over LATENCY_WINDOW.
 var percentiles := {50: 0.0, 75: 0.0, 90: 0.0, 95: 0.0, 99: 0.0}
 
@@ -30,6 +32,21 @@ func _enter_tree() -> void:
 	# Connected here, not in _ready: at startup the main scene's nodes enter the tree
 	# before this autoload's _ready runs, so _ready would miss them.
 	get_tree().node_added.connect(_on_node_added)
+
+
+## Resets everything for a fresh run. Levels call this when they load, including on restart.
+func start_run(targets := DEFAULT_SLA_TARGETS, starting_coins := 0) -> void:
+	sla_targets = targets.duplicate()
+	for p in percentiles:
+		percentiles[p] = 0.0
+	coins = starting_coins
+	coins_per_minute = 0
+	latency_samples.clear()
+	next_check_in = 60.0
+	p50_failing_for = 0.0
+	run_over = false
+	_minute_earnings = 0
+	_recalc_timer = 0.0
 
 
 func _process(delta: float) -> void:
@@ -57,12 +74,13 @@ func _process(delta: float) -> void:
 func _on_node_added(node: Node) -> void:
 	if node is Device:
 		node.request_dropped.connect(_on_request_dropped)
-	if node is Server:
-		node.request_handled.connect(_on_request_handled)
+	if node is Request:
+		node.response_returned.connect(_on_response_returned)
 
 
-func _on_request_handled(_server: Server, payload: Dictionary) -> void:
-	var latency := _now() - float(payload.get("sent_at", _now()))
+## Paid when the response reaches the sky, using the latency measured inside the system.
+func _on_response_returned(payload: Dictionary) -> void:
+	var latency := float(payload.get("finished_at", _now())) - float(payload.get("sent_at", _now()))
 	latency_samples.append(Vector2(_now(), latency))
 	var pay := _pay_for(latency)
 	coins += pay

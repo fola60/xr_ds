@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CPUPart" format=3 uid="uid://dtal0ge4to4im"]
+
+[ext_resource type="Script" uid="uid://6a0drdfur456" path="res://parts/cpu_part.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "1-core CPU, 1 GHz"

@@ -10,6 +10,10 @@ signal request_dropped(device: Device, payload: Dictionary)
 @export var downstream: Array[Device] = [] ## Devices this one can forward requests to.
 
 
+func _enter_tree() -> void:
+	add_to_group("devices")
+
+
 func connect_to(other: Device) -> void:
 	if other != self and other not in downstream:
 		downstream.append(other)

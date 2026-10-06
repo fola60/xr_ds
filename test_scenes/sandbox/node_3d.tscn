@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d2wtw2k1www1q"]
 
-[ext_resource type="Script" uid="uid://lyaabxck54xg" path="res://mesh_instance_3d.gd" id="1_a202f"]
-[ext_resource type="Script" uid="uid://b2e6n4p511bb6" path="res://collision_area.gd" id="2_a0tk4"]
-[ext_resource type="Script" uid="uid://cif1o5it23vy1" path="res://pod.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://lyaabxck54xg" path="res://test_scenes/sandbox/mesh_instance_3d.gd" id="1_a202f"]
+[ext_resource type="Script" uid="uid://b2e6n4p511bb6" path="res://test_scenes/sandbox/collision_area.gd" id="2_a0tk4"]
+[ext_resource type="Script" uid="uid://cif1o5it23vy1" path="res://test_scenes/sandbox/pod.gd" id="2_noarx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

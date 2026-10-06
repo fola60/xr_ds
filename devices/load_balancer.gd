@@ -34,18 +34,23 @@ func receive(request: Request) -> void:
 
 
 func _pick() -> Device:
-	if downstream.is_empty():
+	# Skip empty or deleted entries, so a broken reference can't swallow traffic.
+	var targets: Array[Device] = []
+	for d in downstream:
+		if is_instance_valid(d):
+			targets.append(d)
+	if targets.is_empty():
 		return null
 	match strategy:
 		Strategy.LEAST_CONNECTIONS:
-			var best: Device = downstream[0]
-			for d in downstream:
+			var best: Device = targets[0]
+			for d in targets:
 				if _load_of(d) < _load_of(best):
 					best = d
 			return best
 		_:
-			_next %= downstream.size()
-			var d := downstream[_next]
+			_next %= targets.size()
+			var d := targets[_next]
 			_next += 1
 			return d
 

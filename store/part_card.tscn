@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://store/part_card.gd" id="1_card"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_card"]
+size = Vector3(0.25, 0.02, 0.16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_card"]
+albedo_color = Color(0.15, 0.55, 0.3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_card"]
+size = Vector3(0.25, 0.06, 0.16)
+
+[node name="PartCard" type="Node3D"]
+script = ExtResource("1_card")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_card")
+surface_material_override/0 = SubResource("StandardMaterial3D_card")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+pixel_size = 0.003
+billboard = 1
+font_size = 20
+outline_size = 6
+
+[node name="ClickArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickArea"]
+shape = SubResource("BoxShape3D_card")

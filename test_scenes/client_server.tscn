@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cshd7esimp8l8"]
 
-[ext_resource type="Script" uid="uid://mcej2d5vdbqw" path="res://client.gd" id="1_cli"]
-[ext_resource type="PackedScene" uid="uid://dplx4wn77yi2y" path="res://request.tscn" id="2_req"]
-[ext_resource type="PackedScene" path="res://server.tscn" id="3_srv"]
-[ext_resource type="PackedScene" uid="uid://svgr0yw61vs5" path="res://sla.tscn" id="4_sla"]
+[ext_resource type="Script" uid="uid://mcej2d5vdbqw" path="res://test_scenes/client.gd" id="1_cli"]
+[ext_resource type="PackedScene" uid="uid://dplx4wn77yi2y" path="res://requests/request.tscn" id="2_req"]
+[ext_resource type="PackedScene" path="res://devices/server.tscn" id="3_srv"]
+[ext_resource type="PackedScene" uid="uid://svgr0yw61vs5" path="res://ui/sla.tscn" id="4_sla"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cli"]
 size = Vector3(0.4, 0.4, 0.4)

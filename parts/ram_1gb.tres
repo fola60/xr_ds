@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="RAMPart" format=3 uid="uid://8b87jn3nwfqt"]
+
+[ext_resource type="Script" uid="uid://da2qemgof5xw3" path="res://parts/ram_part.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "1 GB RAM"

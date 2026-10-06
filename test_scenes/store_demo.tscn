@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://mcej2d5vdbqw" path="res://test_scenes/client.gd" id="1_cli"]
+[ext_resource type="PackedScene" uid="uid://dplx4wn77yi2y" path="res://requests/request.tscn" id="2_req"]
+[ext_resource type="PackedScene" path="res://devices/server.tscn" id="3_srv"]
+[ext_resource type="PackedScene" path="res://store/store.tscn" id="4_store"]
+[ext_resource type="Script" path="res://store/shop_item.gd" id="5_shopitem"]
+[ext_resource type="Resource" path="res://store/items/server.tres" id="6_item"]
+[ext_resource type="Resource" path="res://store/items/cpu_1core_2ghz.tres" id="7_item"]
+[ext_resource type="Resource" path="res://store/items/ram_2gb.tres" id="8_item"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cli"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="StoreDemo" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.9, 3.6)
+
+[node name="Store" parent="." instance=ExtResource("4_store")]
+enabled = Array[ExtResource("5_shopitem")]([ExtResource("6_item"), ExtResource("7_item"), ExtResource("8_item")])
+
+[node name="Client" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -4)
+script = ExtResource("1_cli")
+request_scene = ExtResource("2_req")
+target = NodePath("../Server")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Client"]
+mesh = SubResource("BoxMesh_cli")
+
+[node name="Timer" type="Timer" parent="Client"]
+wait_time = 0.5
+autostart = true
+
+[node name="Server" parent="." instance=ExtResource("3_srv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, -4)
+
+[connection signal="timeout" from="Client/Timer" to="Client" method="_on_timer_timeout"]
